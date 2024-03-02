@@ -1,16 +1,78 @@
 require('dotenv').config();
-const { REST, Routes } = require('discord.js');
+const { REST, Routes, ApplicationCommandOptionType } = require('discord.js');
 
 const commands = [
   {
-    name: 'hey',
-    description: 'Replies with hey!',
+    name: 'record',
+    description: 'Perform recording of prompt',
+    options: [
+      {
+        name: 'option',
+        description: 'Select Option',
+        type: ApplicationCommandOptionType.String,
+        choices: [
+          {
+            name: 'record',
+            value: 'record',
+          },
+          {
+            name: 'submit To Blockchain',
+            value: 'submitToBlockchain',
+          },
+        ],
+        required: true,
+      },
+      {
+        name: 'prompt',
+        description: 'Prompt to send to Midjourney',
+        type: ApplicationCommandOptionType.String,
+        required: true,
+      },
+    ],
   },
   {
-    name: 'ping',
-    description: 'Pong!',
+    name: 'embed',
+    description: 'Sends an embed!',
   },
 ];
+
+
+// ========== TEST CODE ==========
+
+// const commands = [
+//   {
+//     name: 'add',
+//     description: 'Adds two numbers.',
+//     options: [
+//       {
+//         name: 'first-number',
+//         description: 'The first number.',
+//         type: ApplicationCommandOptionType.String,
+//         choices: [
+//           {
+//             name: 'one',
+//             value: '1',
+//           },
+//           {
+//             name: 'two',
+//             value: '2',
+//           },
+//           {
+//             name: 'three',
+//             value: '3',
+//           },
+//         ],
+//         required: true,
+//       },
+//       {
+//         name: 'second-number',
+//         description: 'The second number.',
+//         type: ApplicationCommandOptionType.Number,
+//         required: true,
+//       },
+//     ],
+//   },
+// ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
